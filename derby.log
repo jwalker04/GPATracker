@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Wed Apr 06 15:46:55 EDT 2016:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a816c00e-0153-ed1d-03b5-00000000002e 
+on database directory C:\Users\bradj\Documents\GPA files\GPA with class loader sun.misc.Launcher$AppClassLoader@55f96302 
+Loaded from file:/C:/Users/bradj/Documents/GPA%20files/dist/run1281883758/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_77-b03
+user.dir=C:\Users\bradj\Documents\GPA files
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=./
+Database Class Loader started - derby.database.classpath=''

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane id="AnchorPane" prefHeight="679.0" prefWidth="813.0" style="" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXML.FXMLDocumentController">
+  <left>
+    <AnchorPane prefHeight="450.0" prefWidth="127.0" style="-fx-background-color:red;">
+      <children>
+        <VBox fx:id="courseListVBox" layoutX="0.0" layoutY="37.0" prefHeight="475.0" prefWidth="187.0" />
+        <Button fx:id="btnAddCourse" contentDisplay="CENTER" layoutX="0.0" layoutY="0.0" onAction="#addCoursePane" onMouseEntered="#btnAddEntered" onMouseExited="#btnAddExited" prefHeight="37.0" prefWidth="187.0" style="" styleClass="btnAddCourse, btn" text="+" textFill="WHITE" wrapText="false">
+          <font>
+            <Font name="Arial Bold" size="16.0" />
+          </font>
+        </Button>
+      </children>
+    </AnchorPane>
+  </left>
+  <stylesheets>
+    <URL value="@myCSS.css" />
+  </stylesheets>
+   <right>
+      <StackPane fx:id="contentPane" prefHeight="679.0" prefWidth="687.0" BorderPane.alignment="CENTER">
+         <children>
+          <AnchorPane fx:id="addCoursePane" prefHeight="200.0" prefWidth="200.0">
+            <children>
+              <Label layoutX="15.0" layoutY="135.0" prefHeight="22.0" text="Course Name:" />
+              <TextField fx:id="txtCourseName" layoutX="96.0" layoutY="135.0" prefWidth="200.0" promptText="History, Biology, ect." />
+              <Button id="" fx:id="btnCreate" layoutX="96.0" layoutY="171.0" mnemonicParsing="false" onMouseClicked="#addCourse" onMouseEntered="#btnCreateEntered" onMouseExited="#btnCreateExited" styleClass="btnAddCourse, btn" text="Create" textFill="WHITE">
+                <font>
+                  <Font name="System Bold" size="14.0" />
+                </font>
+              </Button>
+              <Label fx:id="lblResult" layoutX="96.0" layoutY="211.0" prefHeight="22.0" prefWidth="200.0" text="" />
+            </children>
+          </AnchorPane>
+            <ScrollPane fx:id="courseContentSPane" prefHeight="200.0" prefWidth="200.0">
+               <content>
+                  <AnchorPane fx:id="courseContentPane" prefHeight="677.0" prefWidth="685.0">
+                     <children>
+                        <VBox fx:id="courseContentVBox" layoutX="42.0" layoutY="85.0" prefHeight="592.0" prefWidth="480.0" />
+                        <Label fx:id="lblCourseName" layoutX="42.0" layoutY="29.0" prefHeight="40.0" prefWidth="480.0">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <VBox fx:id="btnListVBox" layoutX="544.0" layoutY="14.0" prefHeight="77.0" prefWidth="113.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </ScrollPane>
+            <ScrollPane fx:id="settingsSPane" prefHeight="200.0" prefWidth="200.0">
+               <content>
+                  <AnchorPane prefHeight="677.0" prefWidth="685.0">
+                     <children>
+                        <VBox fx:id="settingsVBox" layoutX="56.0" layoutY="53.0" prefHeight="593.0" prefWidth="585.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </ScrollPane>
+         </children>
+      </StackPane>
+   </right>
+</BorderPane>
