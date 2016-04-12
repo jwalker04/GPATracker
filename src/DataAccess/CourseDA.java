@@ -96,6 +96,82 @@ public class CourseDA {
     }
     
     
+    
+    /* Method Name:		getRecords
+    * Purpose:			To get all the records from a table in the database
+    * Parameters:		None
+    * Return:			A vector of all objects made by each record - Vector
+    * Change Log:		Brad Walker 12/26/2015
+    */
+    public static Course getACourse(int courseID)
+    {
+        // error handling
+        try
+        {
+            //connect to DB
+            aConnection = mdlDB.ConnectToDb();
+            //check the connection status
+            if (aConnection == null)
+            {
+                System.out.println("Database connection failed!");
+                return null;
+            }
+
+            //create a statement
+            Statement aStatement = aConnection.createStatement();
+            //create a SQL string to get data from database
+            String strSQL = "SELECT * FROM tblCourse WHERE cID = " + courseID;
+
+            // run the query
+            ResultSet rs = aStatement.executeQuery(strSQL);
+
+            ArrayList<Course> aList = new ArrayList<>();
+            Course course = null;
+
+            // need a boolean variable to indicate whether there is more data
+            boolean boolGotRecord = rs.next();
+
+            //use a loop to build our vector with objects
+            while(boolGotRecord)
+            {
+                course = new Course(rs.getInt("cID"), rs.getString("cName"),
+                    rs.getDouble("cOverall"));
+
+                
+                
+                
+                /*
+                        Test Module:
+                        
+                        To Display what is in the database table tblCourse
+                */
+                System.out.println("Course Name: " + course.getCourseName() + " Course ID: " + course.getCourseID());
+                
+                
+                
+                
+                
+                //put onto the vector
+                aList.add(course);
+
+                //go to the next record if there is one
+                boolGotRecord = rs.next();
+            }//end of while
+
+            //Return the object
+            return course;
+
+        }
+        catch (Exception e) {
+            System.err.println("Error occured in Class:CourseDA:getRecords()" + e.getMessage());
+            return null;
+        }
+
+
+    }
+    
+    
+    
      
     /* Method Name:		addRecord
     * Purpose:			To add records to a table in the database

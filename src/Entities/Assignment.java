@@ -5,6 +5,9 @@
  */
 package Entities;
 
+import DataAccess.AssignmentDA;
+import java.util.ArrayList;
+
 /**
  *
  * @author bradj
@@ -23,32 +26,32 @@ public class Assignment {
     /*
         Getters & Setters
     */
-    public int getID() {
+    public int getAID() {
         return ID;
     }
-    public String getName() {
+    public String getAName() {
         return Name;
     }
-    public double getGrade() {
+    public double getAGrade() {
         return grade;
     }
-    public int gettID() {
+    public int getATID() {
         return tID;
     }
 
-    public void setID(int ID) {
+    public void setAID(int ID) {
         this.ID = ID;
     }
 
-    public void setName(String Name) {
+    public void setAName(String Name) {
         this.Name = Name;
     }
 
-    public void setGrade(double grade) {
+    public void setAGrade(double grade) {
         this.grade = grade;
     }
 
-    public void settID(int tID) {
+    public void setATID(int tID) {
         this.tID = tID;
     }
 
@@ -63,7 +66,63 @@ public class Assignment {
         this.grade = grade;
         this.tID = tID;
     }
+    public Assignment(String Name, double grade, int tID) {
+        this.Name = Name;
+        this.grade = grade;
+        this.tID = tID;
+    }
     
     
     
+    
+    
+    /* Method Name:     getRecords
+    * Purpose:          To get all the records from a table in the database
+    * Parameters:	None
+    * Return:		A vector of all objects made by each record - Vector
+    * Change Log:	Brad Walker 12/23/2015
+    */
+    public static ArrayList getAssignment(int atID) {
+        try {
+
+            return AssignmentDA.getAssignment(atID);
+
+        } catch (Exception ex) {
+            System.err.println("Error occured in Class:Course:getAssignment();  " + ex.getMessage());
+            return null;
+        }
+    }
+    
+     /* Method Name:     addRecord
+    * Purpose:          To get all the records from a table in the database
+    * Parameters:	None
+    * Return:		A vector of all objects made by each record - Vector
+    * Change Log:       Brad Walker 12/23/2015
+    */
+    public static int addAssignment(Assignment assignment) {
+        try {
+
+            return AssignmentDA.addAssignment(assignment);
+
+        } catch (Exception ex) {
+            System.err.println("Error occured in Class:Course:deleteAssignment();  " + ex.getMessage());
+            return -9;
+        }
+    }
+    
+    /* Method Name:     deleteRecords
+    * Purpose:          To get all the records from a table in the database
+    * Parameters:	None
+    * Return:		A vector of all objects made by each record - Vector
+    * Change Log:       Brad Walker 12/23/2015
+    */
+    public static int deleteAssignment(int recordID) {
+        try {
+
+            return AssignmentDA.deleteAssignment(recordID);
+        } catch (Exception ex) {
+            System.err.println("Error occured in Class:Course:deleteAssignment();  " + ex.getMessage());
+            return -9;
+        }
+    }
 }

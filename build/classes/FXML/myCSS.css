@@ -8,27 +8,71 @@ and open the template in the editor.
     Author     : Brad
 */
 .btn {
-    -fx-background-color: red;
+    -fx-background-color: #1c3144;
     -fx-background-radius: 0;
     -fx-background-insets: 0;
     -fx-text-fill: white;
+    -fx-font-size: 18px;
 }
+.btn-Trans {
+    -fx-background-color: rgba(0, 0, 0, 0);
+    -fx-background-radius: .5;
+    -fx-background-insets: 0;
+    -fx-border-color: white;
+    -fx-border-width: 2.5px;
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+}
+
+.btn-TransEntered {
+    -fx-background-color: rgba(0, 0, 0, 0);
+    -fx-background-radius: .5;
+    -fx-background-insets: 0;
+    -fx-border-color: grey;
+    -fx-border-width: 2.5px;
+    -fx-text-fill: grey;
+    -fx-font-size: 18px;
+}
+
 .btnEntered {
-    -fx-background-color: #ff3333;
+    -fx-background-color: #213a51;
     -fx-background-radius: 0;
     -fx-background-insets: 0;
     -fx-text-fill: white;
+    -fx-font-size: 18px;
+
 }
 .btnCourse {
-    -fx-background-color: #ff3333;
+    -fx-background-color: black;
     -fx-background-radius: 0;
     -fx-background-insets: 0;
     -fx-text-fill: white;
 }
-.btnCourseEntered {
-    -fx-background-color: red;
-    -fx-background-radius: 0;
-    -fx-background-insets: 0;
+.lbl-overall {
     -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-text-align: center;
+}
+
+.lbl-gold {
+    -fx-background-color: gold;
+}
+.lbl-green {
+    -fx-background-color: green;
+}
+.lbl-orange {
+    -fx-background-color: orange;
+}
+.lbl-red {
+    -fx-background-color: red;
+}
+
+.content-pane-background {
+    
+    -fx-background-color: #26445e;
+}
+
+.sidebar-pane-background {
+    -fx-background-color: #1c3144;
 }
 

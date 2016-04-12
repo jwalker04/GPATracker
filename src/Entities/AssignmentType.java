@@ -79,6 +79,12 @@ public class AssignmentType {
         Overall = overall;
         cID = cid;
     }
+    public AssignmentType(String name, double percentage, double overall, int cid) {
+        Name = name;
+        Percentage = percentage;
+        Overall = overall;
+        cID = cid;
+    }
     
     
     

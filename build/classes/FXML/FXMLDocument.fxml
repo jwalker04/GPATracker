@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
 <?import java.lang.*?>
 <?import java.net.*?>
 <?import java.util.*?>
@@ -10,10 +11,10 @@
 
 <BorderPane id="AnchorPane" prefHeight="679.0" prefWidth="813.0" style="" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXML.FXMLDocumentController">
   <left>
-    <AnchorPane prefHeight="450.0" prefWidth="127.0" style="-fx-background-color:red;">
+    <AnchorPane prefHeight="450.0" prefWidth="127.0" styleClass="sidebar-pane-background">
       <children>
-        <VBox fx:id="courseListVBox" layoutX="0.0" layoutY="37.0" prefHeight="475.0" prefWidth="187.0" />
-        <Button fx:id="btnAddCourse" contentDisplay="CENTER" layoutX="0.0" layoutY="0.0" onAction="#addCoursePane" onMouseEntered="#btnAddEntered" onMouseExited="#btnAddExited" prefHeight="37.0" prefWidth="187.0" style="" styleClass="btnAddCourse, btn" text="+" textFill="WHITE" wrapText="false">
+        <VBox fx:id="courseListVBox" layoutX="0.0" layoutY="37.0" prefHeight="642.0" prefWidth="187.0" styleClass="sidebar-pane-background" />
+        <Button fx:id="btnAddCourse" contentDisplay="CENTER" layoutX="0.0" layoutY="0.0" onAction="#addCoursePane" onMouseEntered="#btnAddEntered" onMouseExited="#btnAddExited" prefHeight="37.0" prefWidth="187.0" style="" styleClass="btn" text="+" textFill="WHITE" wrapText="false">
           <font>
             <Font name="Arial Bold" size="16.0" />
           </font>
@@ -24,14 +25,23 @@
   <stylesheets>
     <URL value="@myCSS.css" />
   </stylesheets>
-   <right>
+   <center>
       <StackPane fx:id="contentPane" prefHeight="679.0" prefWidth="687.0" BorderPane.alignment="CENTER">
          <children>
-          <AnchorPane fx:id="addCoursePane" prefHeight="200.0" prefWidth="200.0">
+            <ScrollPane fx:id="settingsSPane" prefHeight="200.0" prefWidth="200.0" styleClass="content-pane-background">
+               <content>
+                  <AnchorPane prefHeight="677.0" prefWidth="685.0" styleClass="content-pane-background">
+                     <children>
+                        <VBox fx:id="settingsVBox" layoutX="56.0" layoutY="53.0" prefHeight="593.0" prefWidth="585.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </ScrollPane>
+          <AnchorPane fx:id="addCoursePane" prefHeight="200.0" prefWidth="200.0" styleClass="content-pane-background">
             <children>
-              <Label layoutX="15.0" layoutY="135.0" prefHeight="22.0" text="Course Name:" />
+              <Label layoutX="15.0" layoutY="135.0" prefHeight="22.0" text="Course Name:" textFill="WHITE" />
               <TextField fx:id="txtCourseName" layoutX="96.0" layoutY="135.0" prefWidth="200.0" promptText="History, Biology, ect." />
-              <Button id="" fx:id="btnCreate" layoutX="96.0" layoutY="171.0" mnemonicParsing="false" onMouseClicked="#addCourse" onMouseEntered="#btnCreateEntered" onMouseExited="#btnCreateExited" styleClass="btnAddCourse, btn" text="Create" textFill="WHITE">
+              <Button id="" fx:id="btnCreate" layoutX="96.0" layoutY="171.0" mnemonicParsing="false" onMouseClicked="#addCourse" onMouseEntered="#btnCreateEntered" onMouseExited="#btnCreateExited" styleClass="btn-Trans" text="Create" textFill="WHITE">
                 <font>
                   <Font name="System Bold" size="14.0" />
                 </font>
@@ -39,31 +49,82 @@
               <Label fx:id="lblResult" layoutX="96.0" layoutY="211.0" prefHeight="22.0" prefWidth="200.0" text="" />
             </children>
           </AnchorPane>
-            <ScrollPane fx:id="courseContentSPane" prefHeight="200.0" prefWidth="200.0">
+            <ScrollPane fx:id="courseContentSPane" prefHeight="200.0" prefWidth="200.0" styleClass="content-pane-background">
                <content>
-                  <AnchorPane fx:id="courseContentPane" prefHeight="677.0" prefWidth="685.0">
+                  <AnchorPane fx:id="courseContentPane" prefHeight="677.0" prefWidth="625.0" styleClass="content-pane-background">
                      <children>
-                        <VBox fx:id="courseContentVBox" layoutX="42.0" layoutY="85.0" prefHeight="592.0" prefWidth="480.0" />
-                        <Label fx:id="lblCourseName" layoutX="42.0" layoutY="29.0" prefHeight="40.0" prefWidth="480.0">
+                        <VBox fx:id="courseContentVBox" layoutX="137.0" layoutY="176.0" prefHeight="460.0" prefWidth="276.0" spacing="10.0" />
+                        <Label fx:id="lblCourseName" layoutX="42.0" layoutY="29.0" prefHeight="100.0" prefWidth="209.0" textFill="WHITE">
                            <font>
-                              <Font name="System Bold" size="18.0" />
+                              <Font name="System Bold" size="36.0" />
                            </font>
                         </Label>
-                        <VBox fx:id="btnListVBox" layoutX="544.0" layoutY="14.0" prefHeight="77.0" prefWidth="113.0" />
+                        <VBox fx:id="overallVBox" layoutX="42.0" layoutY="176.0" prefHeight="460.0" prefWidth="95.0" spacing="10.0" />
                      </children>
                   </AnchorPane>
                </content>
             </ScrollPane>
-            <ScrollPane fx:id="settingsSPane" prefHeight="200.0" prefWidth="200.0">
-               <content>
-                  <AnchorPane prefHeight="677.0" prefWidth="685.0">
+            <AnchorPane fx:id="assignmentTypeAPane" prefHeight="200.0" prefWidth="200.0" styleClass="content-pane-background">
+               <children>
+                  <VBox layoutX="18.0" layoutY="182.0" prefHeight="158.0" prefWidth="326.0">
                      <children>
-                        <VBox fx:id="settingsVBox" layoutX="56.0" layoutY="53.0" prefHeight="593.0" prefWidth="585.0" />
+                        <HBox alignment="TOP_RIGHT" prefHeight="50.0" prefWidth="220.0" spacing="5.0">
+                           <children>
+                              <Label text="Name:" textFill="WHITE" />
+                              <TextField fx:id="txtName" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="TOP_RIGHT" prefHeight="50.0" prefWidth="389.0" spacing="5.0">
+                           <children>
+                              <Label text="Percentage:" textFill="WHITE" />
+                              <TextField fx:id="txtPercentage" />
+                           </children>
+                        </HBox>
+                        <HBox fx:id="buttonHBox" alignment="TOP_RIGHT" prefHeight="54.0" prefWidth="248.0" spacing="10.0" />
                      </children>
-                  </AnchorPane>
-               </content>
-            </ScrollPane>
+                  </VBox>
+                  <HBox layoutX="344.0" layoutY="182.0" prefHeight="26.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="lblName" prefHeight="27.0" prefWidth="161.0" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="344.0" layoutY="235.0" prefHeight="26.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="lblPercentage" prefHeight="27.0" prefWidth="161.0" />
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="assignmentAPane" prefHeight="200.0" prefWidth="200.0" styleClass="content-pane-background">
+               <children>
+                  <Label fx:id="lblAssignmentTypeName" layoutX="42.0" layoutY="29.0" prefHeight="100.0" prefWidth="209.0" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="36.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER" layoutX="42.0" layoutY="168.0" prefHeight="65.0" prefWidth="472.0">
+                     <children>
+                        <Label prefHeight="194.0" prefWidth="122.0" text="Date" textFill="WHITE">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="122.0" prefWidth="230.0" text="Assignment Name" textFill="WHITE">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="194.0" prefWidth="122.0" text="Grade" textFill="WHITE">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <VBox fx:id="assignmentListVBox" layoutX="42.0" layoutY="233.0" prefHeight="356.0" prefWidth="472.0" />
+               </children>
+            </AnchorPane>
          </children>
       </StackPane>
-   </right>
+   </center>
 </BorderPane>

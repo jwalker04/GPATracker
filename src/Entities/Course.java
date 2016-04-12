@@ -71,6 +71,28 @@ public class Course {
         }
     }
     
+    
+    
+    /* Method Name:     getRecords
+    * Purpose:          To get all the records from a table in the database
+    * Parameters:	None
+    * Return:		A vector of all objects made by each record - Vector
+    * Change Log:	Brad Walker 12/23/2015
+    */
+    public static Course getACourse(int courseID) {
+        try {
+
+            return CourseDA.getACourse(courseID);
+
+        } catch (Exception ex) {
+            System.err.println("Error occured in Class:Course:getRecord();  " + ex.getMessage());
+            return null;
+        }
+    }
+    
+    
+    
+    
      /* Method Name:     addRecord
     * Purpose:          To get all the records from a table in the database
     * Parameters:	None
