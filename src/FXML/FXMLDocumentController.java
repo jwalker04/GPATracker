@@ -662,7 +662,7 @@ public class FXMLDocumentController implements Initializable {
     */
     public void createAssignment(Assignment assignment) {
  
-        Label lblDate = new Label(assignment.getAName());
+        Label lblDate = new Label(assignment.getADate());
         Label lblAssignmentName = new Label(assignment.getAName());
         Label lblGrade = new Label(String.valueOf(assignment.getAGrade()) );
         

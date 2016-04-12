@@ -58,7 +58,7 @@ public class AssignmentDA {
             //use a loop to build our vector with objects
             while(boolGotRecord)
             {
-                assignment = new Assignment(rs.getInt("aID"), rs.getString("aName"), rs.getDouble("aGrade"), rs.getInt("atID"));
+                assignment = new Assignment(rs.getInt("aID"), rs.getString("aName"), rs.getDouble("aGrade"), rs.getString("aDate"), rs.getInt("atID"));
                           
                 //put onto the vector
                 aList.add(assignment);
@@ -106,9 +106,10 @@ public class AssignmentDA {
             }
             
             //create a SQL string to get data from database
-            String strSQL = "INSERT INTO tblAssignmentType (aName, aGrade, atID ) VALUES ('" 
+            String strSQL = "INSERT INTO tblAssignmentType (aName, aGrade, aDate, atID ) VALUES ('" 
                     + assignment.getAName() + "',"
-                    + assignment.getAGrade() + ","
+                    + assignment.getAGrade() + ",'"
+                    + assignment.getADate()
                     + assignment.getATID() + ")";
 
             // run the query

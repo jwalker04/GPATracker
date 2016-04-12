@@ -114,7 +114,7 @@
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Label prefHeight="194.0" prefWidth="122.0" text="Grade" textFill="WHITE">
+                        <Label alignment="CENTER_RIGHT" prefHeight="194.0" prefWidth="122.0" text="Grade" textFill="WHITE">
                            <font>
                               <Font size="24.0" />
                            </font>

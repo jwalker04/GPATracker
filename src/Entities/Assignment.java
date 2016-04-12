@@ -19,7 +19,10 @@ public class Assignment {
     */
     private int ID;
     private String Name;
-    private double grade;
+    private double Grade;
+    private String Date;
+
+    
     private int tID;
 
     
@@ -33,7 +36,10 @@ public class Assignment {
         return Name;
     }
     public double getAGrade() {
-        return grade;
+        return Grade;
+    }
+    public String getADate() {
+        return Date;
     }
     public int getATID() {
         return tID;
@@ -48,11 +54,14 @@ public class Assignment {
     }
 
     public void setAGrade(double grade) {
-        this.grade = grade;
+        this.Grade = grade;
     }
 
     public void setATID(int tID) {
         this.tID = tID;
+    }
+    public void setaDate(String Date) {
+        this.Date = Date;
     }
 
     
@@ -60,15 +69,17 @@ public class Assignment {
     /*
         Constructor
     */
-    public Assignment(int ID, String Name, double grade, int tID) {
-        this.ID = ID;
-        this.Name = Name;
-        this.grade = grade;
+    public Assignment(int id, String name, double grade, String date, int tID) {
+        this.ID = id;
+        this.Name = name;
+        this.Grade = grade;
+        this.Date = date;
         this.tID = tID;
     }
-    public Assignment(String Name, double grade, int tID) {
-        this.Name = Name;
-        this.grade = grade;
+    public Assignment(String name, double grade, String date, int tID) {
+        this.Name = name;
+        this.Grade = grade;
+        this.Date = date;
         this.tID = tID;
     }
     

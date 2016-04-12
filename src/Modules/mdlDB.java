@@ -33,7 +33,7 @@ public class mdlDB {
         //forward slashes within java for some reason
         System.setProperty("derby.system.home", dbDirectory);
         //create and return the connection
-        String strURL = "jdbc:derby:GPA";
+        String strURL = "jdbc:derby:gpaDB";
 
         try {
             Class.forName("org.apache.derby.jdbc.EmbeddedDriver");

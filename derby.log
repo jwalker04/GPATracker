@@ -1,8 +1,8 @@
 ----------------------------------------------------------------
-Tue Apr 12 17:42:55 EDT 2016:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a816c00e-0154-0c6d-6104-00000000002e 
-on database directory C:\Users\bradj\Documents\GPATracker\GPA with class loader sun.misc.Launcher$AppClassLoader@55f96302 
-Loaded from file:/C:/Users/bradj/Documents/GPATracker/dist/run1944441940/lib/derby.jar
+Tue Apr 12 18:54:37 EDT 2016:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a816c00e-0154-0caf-04e5-00000000002e 
+on database directory C:\Users\bradj\Documents\GPATracker\gpaDB with class loader sun.misc.Launcher$AppClassLoader@55f96302 
+Loaded from file:/C:/Users/bradj/Documents/GPATracker/dist/run1842478613/lib/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_77-b03
 user.dir=C:\Users\bradj\Documents\GPATracker

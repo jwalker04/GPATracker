@@ -21,6 +21,7 @@ CREATE TABLE tblAssignment (
     aID INT NOT NULL GENERATED ALWAYS AS IDENTITY,
     aName varchar(50) NOT NULL,
     aGrade DOUBLE NOT NULL,
+    aDate varchar(8) NOT NULL,
     atID INT NOT NULL,
     PRIMARY KEY (aID),
     FOREIGN KEY (atID) REFERENCES tblAssignmentType(atID)
@@ -33,9 +34,9 @@ INSERT INTO tblAssignmentType (atName, atPercentage, atOverall, cID)
 VALUES
     ('Homework', 50, 100, 1);
 
-INSERT INTO tblAssignment (aName, aGrade, atID)
+INSERT INTO tblAssignment (aName, aGrade, aDate, atID)
 VALUES
-    ('HW 1', 100, 1),
-    ('HW 2', 100, 1),
-    ('HW 3', 100, 1),
-    ('HW 4', 100, 1);
+    ('HW 1', 100, '01/11/16', 1),
+    ('HW 2', 100, '02/12/16', 1),
+    ('HW 3', 100, '03/13/16', 1),
+    ('HW 4', 100, '04/14/16', 1);
