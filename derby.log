@@ -1,13 +1,20 @@
 ----------------------------------------------------------------
+<<<<<<< HEAD
 Tue Apr 12 19:08:17 EDT 2016:
 Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a816c00e-0154-0cbb-89ef-00000000002e 
 on database directory C:\Users\bradj\Documents\GPATracker\gpaDB with class loader sun.misc.Launcher$AppClassLoader@55f96302 
 Loaded from file:/C:/Users/bradj/Documents/GPATracker/dist/run1533255813/lib/derby.jar
+=======
+Tue Apr 12 21:40:51 EDT 2016:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a816c00e-0154-0d47-346b-00000000002e 
+on database directory /Users/Brad/GPATracker/gpaDB with class loader sun.misc.Launcher$AppClassLoader@42a57993 
+Loaded from file:/Users/Brad/GPATracker/dist/run686003286/lib/derby.jar
+>>>>>>> b6b0bfbddb05ceaf2e188315a9fe5cc707c04155
 java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_77-b03
-user.dir=C:\Users\bradj\Documents\GPATracker
-os.name=Windows 10
-os.arch=amd64
-os.version=10.0
+java.runtime.version=1.8.0_25-b17
+user.dir=/Users/Brad/GPATracker
+os.name=Mac OS X
+os.arch=x86_64
+os.version=10.11.3
 derby.system.home=./
 Database Class Loader started - derby.database.classpath=''

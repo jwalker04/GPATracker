@@ -2,14 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/bradj/Documents/GPATracker/src/Database.sql</file>
-            <file>file:/C:/Users/bradj/Documents/GPATracker/src/FXML/FXMLDocumentController.java</file>
-            <file>file:/C:/Users/bradj/Documents/GPATracker/src/FXML/myCSS.css</file>
-            <file>file:/C:/Users/bradj/Documents/GPATracker/src/Entities/Course.java</file>
-            <file>file:/C:/Users/bradj/Documents/GPATracker/src/DataAccess/CourseDA.java</file>
-            <file>file:/C:/Users/bradj/Documents/GPATracker/src/Entities/AssignmentType.java</file>
-            <file>file:/C:/Users/bradj/Documents/GPATracker/src/DataAccess/AssignmentTypeDA.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
