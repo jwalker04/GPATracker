@@ -624,7 +624,7 @@ public class FXMLDocumentController implements Initializable {
         
         aList.stream().forEach((assignment) ->{
         
-            createAssignment(assignment);
+            createAssignmentRow(assignment);
         });
         
         /*
@@ -657,47 +657,52 @@ public class FXMLDocumentController implements Initializable {
     }
     
     
+    
     /*
         Create Assignment HBox
     */
-    public void createAssignment(Assignment assignment) {
+    public void createAssignmentRow(Assignment assignment) {
  
+        /*
+            Create Labels to display assignment data
+        */
         Label lblDate = new Label(assignment.getADate());
         Label lblAssignmentName = new Label(assignment.getAName());
         Label lblGrade = new Label(String.valueOf(assignment.getAGrade()) );
         
+        //Align the text to bottom left of label and change font color to white        
         lblDate.setAlignment(Pos.BOTTOM_LEFT);
         lblDate.setTextFill(Color.WHITE);
-        
         lblAssignmentName.setAlignment(Pos.BOTTOM_LEFT);
         lblAssignmentName.setTextFill(Color.WHITE);
-        
         lblGrade.setAlignment(Pos.BOTTOM_RIGHT);
         lblGrade.setTextFill(Color.WHITE);
         
-        //Resize all labels
+        //Resize labels to specified width 
+        //(same as the headers above assignmentListVBox)
         lblDate.setMaxWidth(122);
         lblAssignmentName.setMaxWidth(230);
         lblGrade.setMaxWidth(122);
         
+        //Create HBox to align assignment data
         HBox assignmentHBox = new HBox();
         
-        
-        
+        //Allow the labels to grow to their max width
         assignmentHBox.setHgrow(lblDate, Priority.ALWAYS);
         assignmentHBox.setHgrow(lblAssignmentName, Priority.ALWAYS);
         assignmentHBox.setHgrow(lblGrade, Priority.ALWAYS);
         
-        assignmentHBox.setAlignment(Pos.CENTER);
+        //Add labels to Hbox
         assignmentHBox.getChildren().addAll(lblDate,lblAssignmentName,lblGrade);
         
-        
+        //Create a separator, Add padding top and bottom
+        //and set width to fill VBox
         Separator spr = new Separator();
         spr.setPadding(new Insets(5,0,5,0));
         spr.setMaxWidth(Double.MAX_VALUE);
         
+        //Add HBox and Separator to the VBox
         assignmentListVBox.getChildren().addAll(assignmentHBox, spr);
-
     }
     
     
