@@ -591,6 +591,10 @@ public class FXMLDocumentController implements Initializable {
     */
     public void displayAssignmentPane(AssignmentType assignmentType) {
         
+        //Variables
+        int atID = assignmentType.getATID();
+        String atName = assignmentType.getATName();
+        
         //Switch panes
         switchPane(assignmentAPane);
         
@@ -598,12 +602,12 @@ public class FXMLDocumentController implements Initializable {
         assignmentListVBox.getChildren().clear();
         
         //Set the Assignment Type Name
-        lblAssignmentTypeName.setText(assignmentType.getATName());
+        lblAssignmentTypeName.setText(atName);
         
         //Loop through list of assignments
         //Get list of assignment types for current course.
         ArrayList<Assignment> aList = new ArrayList<>();
-        aList = Assignment.getAssignment(assignmentType.getATID());
+        aList = Assignment.getAssignment(atID);
         
         aList.stream().forEach((assignment) ->{
         
@@ -613,7 +617,7 @@ public class FXMLDocumentController implements Initializable {
         /*
             Create Assignment Button
         */
-        CustomButton btnCreateAssignment = createButton("Create", assignmentType.getATID());
+        CustomButton btnCreateAssignment = createButton("Create", atID);
         
         
         btnCreateAssignment.setOnAction((ActionEvent e) ->{
@@ -621,7 +625,7 @@ public class FXMLDocumentController implements Initializable {
             //Switch Panes
             switchPane(createAssignmentAPane);
             
-            
+            displayCreateAssignmentPane(assignmentType);
             
         });
         
@@ -677,6 +681,44 @@ public class FXMLDocumentController implements Initializable {
         
         //Add HBox and Separator to the VBox
         assignmentListVBox.getChildren().addAll(assignmentHBox, spr);
+    }
+    
+    
+    
+    /*
+        Display Create Assingment Pane
+    */
+    public void displayCreateAssignmentPane(AssignmentType assignmentType) {
+        
+        //Variables
+        int atID = assignmentType.getATID();
+        
+        /*
+            New Create button
+        */
+        CustomButton btnCreate = createButton("Create", atID);
+        
+        //Action Event
+        btnCreate.setOnAction((ActionEvent event) -> {
+            
+        });
+        
+        
+        /*
+            New Back Button
+        */
+        CustomButton btnBack = createButton("<-", atID);
+        
+        btnBack.setOnAction((ActionEvent event) -> {
+        
+            displayAssignmentPane(assignmentType);
+            
+        });
+        
+        //Clear and repopulate button HBox
+        buttonAHBox.getChildren().clear();
+        buttonAHBox.getChildren().addAll(btnBack, btnCreate);
+        
     }
     
     
