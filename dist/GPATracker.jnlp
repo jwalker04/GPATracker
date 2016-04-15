@@ -11,19 +11,11 @@
   </resources>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-<<<<<<< HEAD
-    <jar href="GPATracker.jar" size="22348" download="eager" />
-    <jar href="lib\derby.jar" size="3104883" download="eager" />
-    <jar href="lib\derbyclient.jar" size="585704" download="eager" />
-    <jar href="lib\derbynet.jar" size="266471" download="eager" />
-    <jar href="lib\derbytools.jar" size="229601" download="eager" />
-=======
-    <jar href="GPATracker.jar" size="22289" download="eager" />
+    <jar href="GPATracker.jar" size="22494" download="eager" />
     <jar href="lib/derby.jar" size="3104883" download="eager" />
     <jar href="lib/derbyclient.jar" size="585704" download="eager" />
     <jar href="lib/derbynet.jar" size="266471" download="eager" />
     <jar href="lib/derbytools.jar" size="229601" download="eager" />
->>>>>>> b6b0bfbddb05ceaf2e188315a9fe5cc707c04155
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="GPATracker" >
     <param name="requiredFXVersion" value="8.0+"/>

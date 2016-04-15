@@ -18,7 +18,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
@@ -91,7 +93,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Button btnATBack;
     @FXML
-    private HBox buttonHBox;
+    private HBox buttonATHBox;
     @FXML
     private TextField txtName;
     @FXML
@@ -124,6 +126,19 @@ public class FXMLDocumentController implements Initializable {
     private VBox assignmentListVBox;
     
     
+    /*
+        Create Assignment Pane
+    */
+    @FXML
+    private AnchorPane createAssignmentAPane;
+    @FXML
+    private TextField txtAName;
+    @FXML
+    private TextField txtAGrade;
+    @FXML
+    private DatePicker dpDate;
+    @FXML
+    private HBox buttonAHBox;
     
     
     /*
@@ -296,8 +311,9 @@ public class FXMLDocumentController implements Initializable {
         //Change panes, display course information, display new pane componets
         btn.setOnAction((ActionEvent e) -> {
             boolean removeResult;
-            contentPane.getChildren().clear();
-            contentPane.getChildren().add(courseContentPane);
+            
+            //Switch Panes
+            switchPane(courseContentPane);
             
             /*
                 Add this course data to the UI
@@ -440,8 +456,8 @@ public class FXMLDocumentController implements Initializable {
                     //Display the assignmentType to vbox as button
                     displayAssignmentTypes(course.getCourseID());
                     
-                    contentPane.getChildren().clear();
-                    contentPane.getChildren().add(courseContentPane);
+                    //Switch Panes
+                    switchPane(courseContentPane);
                     
                     return true;
                 }
@@ -498,34 +514,19 @@ public class FXMLDocumentController implements Initializable {
     */
     public void displayATCreateComponets(int courseID) {
 
-        //Clear StackPane and add Pane to create new assignmentType
-        contentPane.getChildren().clear();
-        contentPane.getChildren().add(assignmentTypeAPane);
+        
+        //Switch Panes
+        switchPane(assignmentTypeAPane);
 
         /*
             Back Button
         */
-        CustomButton btnATBack = new CustomButton("<-", courseID);
+        CustomButton btnBack = createButton("<-", courseID);
 
-        btnATBack.getStyleClass().add("btn-Trans");
+        btnBack.setOnAction((ActionEvent event) -> {
 
-
-        //Create a MouseEntered and MouseExited event that changes the 
-        //style of the button
-        btnATBack.setOnMouseEntered((MouseEvent event) -> {
-            btnATBack.getStyleClass().add("btn-TransEntered");
-            btnATBack.getStyleClass().remove("btn-Trans");
-        });
-        btnATBack.setOnMouseExited((MouseEvent event) -> {
-            btnATBack.getStyleClass().add("btn-Trans");
-            btnATBack.getStyleClass().remove("btn-TransEntered");
-        });
-
-
-        btnATBack.setOnAction((ActionEvent event) -> {
-
-            contentPane.getChildren().clear();
-            contentPane.getChildren().add(courseContentPane);
+            //Switch Panes
+            switchPane(courseContentPane);
 
             Course course = Course.getACourse(courseID);
 
@@ -551,32 +552,15 @@ public class FXMLDocumentController implements Initializable {
         /*
             Create Button
         */
-        CustomButton btnATCreate = new CustomButton("Create", courseID);
+        CustomButton btnCreate = createButton("Create", courseID);
 
-        //Set button style
-        btnATCreate.getStyleClass().add("btn-Trans");
-
-        //Create a MouseEntered and MouseExited event that changes the 
-        //style of the button
-        btnATCreate.setOnMouseEntered((MouseEvent event) -> {
-            btnATCreate.getStyleClass().add("btn-TransEntered");
-            btnATCreate.getStyleClass().remove("btn-Trans");
-        });
-        btnATCreate.setOnMouseExited((MouseEvent event) -> {
-            btnATCreate.getStyleClass().add("btn-Trans");
-            btnATCreate.getStyleClass().remove("btn-TransEntered");
-        });
-
-        /*
-            Create Button Action Event
-        */
-        btnATCreate.setOnAction((ActionEvent event) -> {
+        //Add Action Event to button
+        btnCreate.setOnAction((ActionEvent event) -> {
 
             /*
                 Call Function to create new assignmentType 
                 and add it to the database
             */
-
             boolean result = createAssignmentType(courseID);
 
             //Check result of adding AT and clear screen if it was a success
@@ -593,10 +577,10 @@ public class FXMLDocumentController implements Initializable {
         });
 
         //Clear HBox of any buttons
-        buttonHBox.getChildren().clear();
+        buttonATHBox.getChildren().clear();
 
         //Add the Back button then Create button to the HBox
-        buttonHBox.getChildren().addAll(btnATBack, btnATCreate);
+        buttonATHBox.getChildren().addAll(btnBack, btnCreate);
 
     }
     
@@ -608,8 +592,7 @@ public class FXMLDocumentController implements Initializable {
     public void displayAssignmentPane(AssignmentType assignmentType) {
         
         //Switch panes
-        contentPane.getChildren().clear();
-        contentPane.getChildren().add(assignmentAPane);
+        switchPane(assignmentAPane);
         
         //Clear the list of assignments before repopulating
         assignmentListVBox.getChildren().clear();
@@ -630,22 +613,13 @@ public class FXMLDocumentController implements Initializable {
         /*
             Create Assignment Button
         */
-        CustomButton btnCreateAssignment = new CustomButton("Create", assignmentType.getATID());
-         
-        btnCreateAssignment.getStyleClass().add("btn-Trans");
-         
-        //Create a MouseEntered and MouseExited event that changes the 
-        //style of the button
-        btnCreateAssignment.setOnMouseEntered((MouseEvent event) -> {
-            btnCreateAssignment.getStyleClass().add("btn-TransEntered");
-            btnCreateAssignment.getStyleClass().remove("btn-Trans");
-        });
-        btnCreateAssignment.setOnMouseExited((MouseEvent event) -> {
-            btnCreateAssignment.getStyleClass().add("btn-Trans");
-            btnCreateAssignment.getStyleClass().remove("btn-TransEntered");
-        });
+        CustomButton btnCreateAssignment = createButton("Create", assignmentType.getATID());
+        
         
         btnCreateAssignment.setOnAction((ActionEvent e) ->{
+            
+            //Switch Panes
+            switchPane(createAssignmentAPane);
             
             
             
@@ -711,32 +685,17 @@ public class FXMLDocumentController implements Initializable {
     /*
         Display the Settings Pane and componets for X Course
     */
-    public void displaySettings(int courseID) {
-                        
-        contentPane.getChildren().clear();
-        contentPane.getChildren().add(settingsSPane);
+    public void displaySettings(int id) {
+               
+        //Switch Panes
+        switchPane(settingsSPane);
 
         settingsVBox.getChildren().clear();
             
-        CustomButton btnDeleteCourse = new CustomButton("Delete", courseID);
+        CustomButton btnDelete = createButton("Delete", id);
 
-        //Set Button Style
-        btnDeleteCourse.getStyleClass().add("btn");
-
-        //Create a MouseEntered and MouseExited event that changes the 
-        //style of the button
-        btnDeleteCourse.setOnMouseEntered((MouseEvent event) -> {
-            btnDeleteCourse.getStyleClass().add("btnEntered");
-
-            btnDeleteCourse.getStyleClass().remove("btn");
-        });
-        btnDeleteCourse.setOnMouseExited((MouseEvent event) -> {
-            btnDeleteCourse.getStyleClass().add("btn");
-            btnDeleteCourse.getStyleClass().remove("btnEntered");
-        });
-
-        btnDeleteCourse.setOnAction((ActionEvent event) -> {
-            int result = Course.deleteRecord(btnDeleteCourse.getID());
+        btnDelete.setOnAction((ActionEvent event) -> {
+            int result = Course.deleteRecord(btnDelete.getID());
 
             if(result == 1) {
                 System.out.println("Deleted");
@@ -754,13 +713,50 @@ public class FXMLDocumentController implements Initializable {
                 displayCourse(aCourse);
             });
 
-            contentPane.getChildren().clear();
-            contentPane.getChildren().add(addCoursePane);  
+            //Switch Panes
+            switchPane(addCoursePane);  
 
         });
         
-        settingsVBox.getChildren().add(btnDeleteCourse);
-   }
+        settingsVBox.getChildren().add(btnDelete);
+    }
+    
+    
+    /*
+        Generate basic Custom Button
+    */
+    public CustomButton createButton(String name, int courseID) {
+        
+        CustomButton btn = new CustomButton(name, courseID);
+        
+        //Set initial Style
+        btn.getStyleClass().add("btn-Trans");
+         
+        //Create a MouseEntered and MouseExited event that changes the 
+        //style of the button
+        btn.setOnMouseEntered((MouseEvent event) -> {
+            btn.getStyleClass().add("btn-TransEntered");
+            btn.getStyleClass().remove("btn-Trans");
+        });
+        btn.setOnMouseExited((MouseEvent event) -> {
+            btn.getStyleClass().add("btn-Trans");
+            btn.getStyleClass().remove("btn-TransEntered");
+        });
+        
+        //Return Button
+        return btn;
+    }
+    
+    
+    
+    
+    /*
+        Switch Panes
+    */
+    public void switchPane(Node aPane) {
+        contentPane.getChildren().clear();
+        contentPane.getChildren().add(aPane);
+    }
     
     
     

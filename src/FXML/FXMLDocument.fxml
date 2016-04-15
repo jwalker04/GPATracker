@@ -68,7 +68,7 @@
                               <TextField fx:id="txtPercentage" />
                            </children>
                         </HBox>
-                        <HBox fx:id="buttonHBox" alignment="TOP_RIGHT" prefHeight="54.0" prefWidth="248.0" spacing="10.0" />
+                        <HBox fx:id="buttonATHBox" alignment="TOP_RIGHT" prefHeight="54.0" prefWidth="248.0" spacing="10.0" />
                      </children>
                   </VBox>
                   <HBox layoutX="344.0" layoutY="182.0" prefHeight="26.0" prefWidth="200.0">
@@ -83,6 +83,18 @@
                   </HBox>
                </children>
             </AnchorPane>
+          <AnchorPane fx:id="addCoursePane" prefHeight="200.0" prefWidth="200.0" styleClass="content-pane-background">
+            <children>
+              <Label layoutX="15.0" layoutY="135.0" prefHeight="22.0" text="Course Name:" textFill="WHITE" />
+              <TextField fx:id="txtCourseName" layoutX="102.0" layoutY="133.0" prefWidth="200.0" promptText="History, Biology, ect." />
+              <Button id="" fx:id="btnCreate" layoutX="102.0" layoutY="170.0" mnemonicParsing="false" onMouseClicked="#addCourse" onMouseEntered="#btnCreateEntered" onMouseExited="#btnCreateExited" styleClass="btn-Trans" text="Create" textFill="WHITE">
+                <font>
+                  <Font name="System Bold" size="14.0" />
+                </font>
+              </Button>
+              <Label fx:id="lblResult" layoutX="302.0" layoutY="136.0" prefHeight="22.0" prefWidth="200.0" text="" />
+            </children>
+          </AnchorPane>
             <AnchorPane fx:id="assignmentAPane" prefHeight="200.0" prefWidth="200.0" styleClass="content-pane-background">
                <children>
                   <Label fx:id="lblAssignmentTypeName" layoutX="42.0" layoutY="29.0" prefHeight="100.0" prefWidth="209.0" textFill="WHITE">
@@ -112,18 +124,40 @@
                   <VBox fx:id="assignmentListVBox" layoutX="42.0" layoutY="233.0" prefHeight="356.0" prefWidth="472.0" />
                </children>
             </AnchorPane>
-          <AnchorPane fx:id="addCoursePane" prefHeight="200.0" prefWidth="200.0" styleClass="content-pane-background">
-            <children>
-              <Label layoutX="15.0" layoutY="135.0" prefHeight="22.0" text="Course Name:" textFill="WHITE" />
-              <TextField fx:id="txtCourseName" layoutX="102.0" layoutY="133.0" prefWidth="200.0" promptText="History, Biology, ect." />
-              <Button id="" fx:id="btnCreate" layoutX="102.0" layoutY="170.0" mnemonicParsing="false" onMouseClicked="#addCourse" onMouseEntered="#btnCreateEntered" onMouseExited="#btnCreateExited" styleClass="btn-Trans" text="Create" textFill="WHITE">
-                <font>
-                  <Font name="System Bold" size="14.0" />
-                </font>
-              </Button>
-              <Label fx:id="lblResult" layoutX="302.0" layoutY="136.0" prefHeight="22.0" prefWidth="200.0" text="" />
-            </children>
-          </AnchorPane>
+            <AnchorPane fx:id="createAssignmentAPane" prefHeight="200.0" prefWidth="200.0" styleClass="content-pane-background">
+               <children>
+                  <VBox layoutX="14.0" layoutY="140.0" prefHeight="128.0" prefWidth="443.0">
+                     <children>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="306.0">
+                           <children>
+                              <Label text="Assignment Name:" textFill="WHITE" />
+                              <TextField fx:id="txtAName" />
+                              <Label prefHeight="17.0" prefWidth="125.0" textFill="WHITE" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="306.0">
+                           <children>
+                              <Label text="Grade:" textFill="WHITE" />
+                              <TextField fx:id="txtAGrade" />
+                              <Label prefWidth="125.0" textFill="WHITE" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="306.0">
+                           <children>
+                              <Label text="Due Date:" textFill="WHITE" />
+                              <DatePicker fx:id="dpDate" prefHeight="27.0" prefWidth="166.0" />
+                              <Label prefWidth="125.0" textFill="WHITE" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox layoutX="165.0" layoutY="268.0" prefHeight="51.0" prefWidth="170.0">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0" />
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
          </children>
       </StackPane>
    </center>
