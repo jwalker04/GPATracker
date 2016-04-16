@@ -11,6 +11,7 @@ import Entities.Course;
 import Entities.CustomButton;
 import javafx.scene.input.MouseEvent;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -54,7 +55,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private AnchorPane addCoursePane;
     @FXML
-    private Button btnCreate;
+    private Button btnCreateCourse;
     @FXML
     private TextField txtCourseName;
     @FXML
@@ -156,13 +157,13 @@ public class FXMLDocumentController implements Initializable {
     }
     @FXML
     protected void btnCreateEntered(MouseEvent event) {
-        btnCreate.getStyleClass().remove("btn-Trans");
-        btnCreate.getStyleClass().add("btn-TransEntered");
+        btnCreateCourse.getStyleClass().remove("btn-Trans");
+        btnCreateCourse.getStyleClass().add("btn-TransEntered");
     }
     @FXML
     protected void btnCreateExited(MouseEvent event) {
-        btnCreate.getStyleClass().remove("btn-TransEntered");
-        btnCreate.getStyleClass().add("btn-Trans");
+        btnCreateCourse.getStyleClass().remove("btn-TransEntered");
+        btnCreateCourse.getStyleClass().add("btn-Trans");
     }
     @FXML
     protected void btnDeleteExited(MouseEvent event) {
@@ -207,70 +208,159 @@ public class FXMLDocumentController implements Initializable {
     }
     
     
+       
+    
+    /***************************************************************************
+    
+    Display Panes
+     * @param assignmentType    
+    ***************************************************************************/
+    
+ 
     
     /*
-        Pass through the course ID to display corresponding ATs
+        Assignment Pane
     */
-    @FXML 
-    private void DisplayATPane() {
+    public void displayAssignmentPane(AssignmentType assignmentType) {
+        
+        //Variables
+        int atID = assignmentType.getATID();
+        String atName = assignmentType.getATName();
+        
+        //Switch panes
+        switchPane(assignmentAPane);
+        
+        //Clear the list of assignments before repopulating
+        assignmentListVBox.getChildren().clear();
+        
+        //Set the Assignment Type Name
+        lblAssignmentTypeName.setText(atName);
+        
+        //Loop through list of assignments
+        //Get list of assignment types for current course.
+        ArrayList<Assignment> aList = new ArrayList<>();
+        aList = Assignment.getAssignment(atID);
+        
+        
+        //Loop through list of assignments
+        aList.stream().forEach((assignment) ->{
+        
+            //Dsiplay Assignments
+            createAssignmentRow(assignment);
+        });
+        
+        /*
+            Create Assignment Button
+        */
+        CustomButton btnCreateAssignment = createButton("Create", atID);
+        
+        
+        btnCreateAssignment.setOnAction((ActionEvent e) ->{
+            
+            displayCreateAssignmentPane(assignmentType);
+            
+        });
+        
+        //Add create assignment button to the VBox
+        assignmentListVBox.getChildren().add(btnCreateAssignment);
         
     }
     
-       
+    
     
     /*
-    Method:     addCourse()
-    Purpose:    Create a new course record in DB via user input
-    Param:      none
-    Log:        Brad Walker 4/2/2016
+        Display Create Assingment Pane
     */
-    @FXML
-    private void addCourse() {
+    public void displayCreateAssignmentPane(AssignmentType assignmentType) {
+        
+        //Switch Panes
+        switchPane(createAssignmentAPane);
+        
+        //Set default date to current date
+        dpDate.setValue(LocalDate.now());
         
         //Variables
-        String cName;
-        int result;
-                
-        //Create new Course object to add to DB
-        Course course;
-                
-        //Get input from user
-        cName = txtCourseName.getText();
-                
-        //Give 0.0 as initial overall grade
-        course = new Course(cName, 0.0);
-                
-        if(txtCourseName.getText().isEmpty()){
-            result = 0;
+        int atID = assignmentType.getATID();
+        
+        /*
+            New Create button
+        */
+        CustomButton btnCreate = createButton("Create", atID);
+        
+        //Action Event
+        btnCreate.setOnAction((ActionEvent event) -> {
             
-            //Blank textbox error
-            lblResult.setText("Required Field.");
-                       
-        } else {
-                        
-            //Add Course object to DB
-            result = Course.addRecord(course);
+            //Create new Assignment and add to database
+            createAssignment(assignmentType);
             
-            //Reset the error lable and course textbox.
-            lblResult.setText("");
-            txtCourseName.setText("");
-        }
+        });
+        
+        
+        /*
+            New Back Button
+        */
+        CustomButton btnBack = createButton("<-", atID);
+        
+        btnBack.setOnAction((ActionEvent event) -> {
+        
+            displayAssignmentPane(assignmentType);
+            
+        });
+        
+        //Clear and repopulate button HBox
+        buttonAHBox.getChildren().clear();
+        buttonAHBox.getChildren().addAll(btnBack, btnCreate);
+        
+    }
+    
+
+    
+    /*
+        Display the Settings Pane and components for X Course
+    */
+    public void displaySettingsPane(int id) {
                
-        if(result == 1) {
-                        
-            //Clear the VBox and then repopulate them
+        //Switch Panes
+        switchPane(settingsSPane);
+
+        settingsVBox.getChildren().clear();
+            
+        CustomButton btnDelete = createButton("Delete", id);
+
+        btnDelete.setOnAction((ActionEvent event) -> {
+            int result = Course.deleteRecord(btnDelete.getID());
+
+            if(result == 1) {
+                System.out.println("Deleted");
+            }
+
             courseListVBox.getChildren().clear();
-                        
+
             //List of courses in DB
             ArrayList<Course> courseList;
             courseList = Course.getCourse();
-                       
+
+
             //Loop through all courses and display them
             courseList.stream().forEach((aCourse) -> {
                 displayCourse(aCourse);
             });
-        }
+
+            //Switch Panes
+            switchPane(addCoursePane);  
+
+        });
+        
+        settingsVBox.getChildren().add(btnDelete);
     }
+    
+    
+    
+    /***************************************************************************
+     
+    Display Data
+    
+    ***************************************************************************/
     
     
     
@@ -308,7 +398,7 @@ public class FXMLDocumentController implements Initializable {
             btn.getStyleClass().remove("btnEntered");
         });
                 
-        //Change panes, display course information, display new pane componets
+        //Change panes, display course information, display new pane components
         btn.setOnAction((ActionEvent e) -> {
             boolean removeResult;
             
@@ -325,7 +415,7 @@ public class FXMLDocumentController implements Initializable {
             overallVBox.getChildren().clear();
             
             //Display the assignmentType to vbox as button
-            //and display new componets
+            //and display new components
             displayAssignmentTypes(aCourse.getCourseID()); 
                         
         });
@@ -415,91 +505,80 @@ public class FXMLDocumentController implements Initializable {
             overallVBox.getChildren().add(lblOverall);
             courseContentVBox.getChildren().add(btnAssignmentType);
         }
-        displayATComponets(courseID);
+        displayATComponents(courseID);
     }
+    
+    
+    
+    /*
+        Create Assignment HBox
+    */
+    public void createAssignmentRow(Assignment assignment) {
+ 
+        /*
+            Create Labels to display assignment data
+        */
+        Label lblDate = new Label(assignment.getADate());
+        Label lblAssignmentName = new Label(assignment.getAName());
+        Label lblGrade = new Label(String.valueOf(assignment.getAGrade()) );
         
-    
-    /*
-        Create New Assignment Type
-    */
-    public boolean createAssignmentType(int courseID) {
-
-        if(txtName.getText().isEmpty() == false) {
-           
-            if(txtPercentage.getText().isEmpty() == false) {
-               
-                String name;
-                Double percentage;
-
-                name = txtName.getText();
-                percentage = Double.valueOf(txtPercentage.getText());
-
-                //Create new Assignment Type
-                AssignmentType assignmentType = new AssignmentType(name, percentage, 0.0, courseID); 
-
-                //Add new Assignment Type to database
-                int result = AssignmentType.addAssignmentType(assignmentType);
-
-                if(result == 1 ) {
-                    
-                    Course course = Course.getACourse(courseID);
-
-                    /*
-                         Add data from this course to the UI
-                    */
-                    lblCourseName.setText(course.getCourseName());
-
-                    //Clear current vboxs before repopulating
-                    courseContentVBox.getChildren().clear();
-                    overallVBox.getChildren().clear();
-
-                    //Display the assignmentType to vbox as button
-                    displayAssignmentTypes(course.getCourseID());
-                    
-                    //Switch Panes
-                    switchPane(courseContentPane);
-                    
-                    return true;
-                }
-            } else {
-                lblPercentage.setText("Required Field.");
-                return false;
-            }
-       } else {
-            lblName.setText("Required Field.");
-            return false;
-       }
-        return false;
+        //Align the text to bottom left of label and change font color to white        
+        lblDate.setAlignment(Pos.BOTTOM_LEFT);
+        lblDate.setTextFill(Color.WHITE);
+        lblAssignmentName.setAlignment(Pos.BOTTOM_LEFT);
+        lblAssignmentName.setTextFill(Color.WHITE);
+        lblGrade.setAlignment(Pos.BOTTOM_RIGHT);
+        lblGrade.setTextFill(Color.WHITE);
+        
+        //Resize labels to specified width 
+        //(same as the headers above assignmentListVBox)
+        lblDate.setMaxWidth(122);
+        lblAssignmentName.setMaxWidth(230);
+        lblGrade.setMaxWidth(122);
+        
+        //Create HBox to align assignment data
+        HBox assignmentHBox = new HBox();
+        
+        //Allow the labels to grow to their max width
+        HBox.setHgrow(lblDate, Priority.ALWAYS);
+        HBox.setHgrow(lblAssignmentName, Priority.ALWAYS);
+        HBox.setHgrow(lblGrade, Priority.ALWAYS);
+        
+        //Add labels to Hbox
+        assignmentHBox.getChildren().addAll(lblDate,lblAssignmentName,lblGrade);
+        
+        //Create a separator, Add padding top and bottom
+        //and set width to fill VBox
+        Separator spr = new Separator();
+        spr.setPadding(new Insets(5,0,5,0));
+        spr.setMaxWidth(Double.MAX_VALUE);
+        
+        //Add HBox and Separator to the VBox
+        assignmentListVBox.getChildren().addAll(assignmentHBox, spr);
     }
     
     
     
+    /***************************************************************************
+    
+    Display Pane Components
+    
+    ***************************************************************************/
+    
+    
+    
     /*
-        Display other componets (other than Assignment Type Buttons) to Course Content Pane
+        Display other components (other than Assignment Type Buttons) to Course Content Pane
     */
-    public void displayATComponets(int courseID) {
+    public void displayATComponents(int courseID) {
           
         /*
             Create a button to create a new assignmentType
         */
-        CustomButton btnCreateAssignmentType = new CustomButton("Create", courseID);
-        
-        //Set the style for the button
-        btnCreateAssignmentType.getStyleClass().add("btn-Trans");
-        
-        //Create a MouseEntered and MouseExited event that changes the 
-        //style of the button
-        btnCreateAssignmentType.setOnMouseEntered((MouseEvent event) -> {
-            btnCreateAssignmentType.getStyleClass().add("btn-TransEntered");
-            btnCreateAssignmentType.getStyleClass().remove("btn-Trans");
-        });
-        btnCreateAssignmentType.setOnMouseExited((MouseEvent event) -> {
-            btnCreateAssignmentType.getStyleClass().add("btn-Trans");
-            btnCreateAssignmentType.getStyleClass().remove("btn-TransEntered");
-        });
+        CustomButton btnCreateAssignmentType = createButton("Create", courseID);
         btnCreateAssignmentType.setOnAction((ActionEvent e) -> {
            
-            displayATCreateComponets(courseID);
+            displayATCreateComponents(courseID);
                                    
         });
             
@@ -512,7 +591,7 @@ public class FXMLDocumentController implements Initializable {
     /*
         Display componets for the Create Assignment Type Pane
     */
-    public void displayATCreateComponets(int courseID) {
+    public void displayATCreateComponents(int courseID) {
 
         
         //Switch Panes
@@ -586,183 +665,194 @@ public class FXMLDocumentController implements Initializable {
     
     
     
+    /***************************************************************************
+    
+    Create Data
+    
+    ***************************************************************************/
+    
+    
+    
     /*
-        Assignment Pane
+    Method:     createCourse()
+    Purpose:    Create a new course record in DB via user input
+    Param:      none
+    Log:        Brad Walker 4/2/2016
     */
-    public void displayAssignmentPane(AssignmentType assignmentType) {
+    @FXML
+    private void createCourse() {
         
         //Variables
-        int atID = assignmentType.getATID();
-        String atName = assignmentType.getATName();
-        
-        //Switch panes
-        switchPane(assignmentAPane);
-        
-        //Clear the list of assignments before repopulating
-        assignmentListVBox.getChildren().clear();
-        
-        //Set the Assignment Type Name
-        lblAssignmentTypeName.setText(atName);
-        
-        //Loop through list of assignments
-        //Get list of assignment types for current course.
-        ArrayList<Assignment> aList = new ArrayList<>();
-        aList = Assignment.getAssignment(atID);
-        
-        aList.stream().forEach((assignment) ->{
-        
-            createAssignmentRow(assignment);
-        });
-        
-        /*
-            Create Assignment Button
-        */
-        CustomButton btnCreateAssignment = createButton("Create", atID);
-        
-        
-        btnCreateAssignment.setOnAction((ActionEvent e) ->{
+        String cName;
+        int result;
+                
+        //Create new Course object to add to DB
+        Course course;
+                
+        //Get input from user
+        cName = txtCourseName.getText();
+                
+        //Give 0.0 as initial overall grade
+        course = new Course(cName, 0.0);
+                
+        if(txtCourseName.getText().isEmpty()){
+            result = 0;
             
-            //Switch Panes
-            switchPane(createAssignmentAPane);
+            //Blank textbox error
+            lblResult.setText("Required Field.");
+                       
+        } else {
+                        
+            //Add Course object to DB
+            result = Course.addRecord(course);
             
-            displayCreateAssignmentPane(assignmentType);
-            
-        });
-        
-        //Add create assignment button to the VBox
-        assignmentListVBox.getChildren().add(btnCreateAssignment);
-        
-    }
-    
-    
-    
-    /*
-        Create Assignment HBox
-    */
-    public void createAssignmentRow(Assignment assignment) {
- 
-        /*
-            Create Labels to display assignment data
-        */
-        Label lblDate = new Label(assignment.getADate());
-        Label lblAssignmentName = new Label(assignment.getAName());
-        Label lblGrade = new Label(String.valueOf(assignment.getAGrade()) );
-        
-        //Align the text to bottom left of label and change font color to white        
-        lblDate.setAlignment(Pos.BOTTOM_LEFT);
-        lblDate.setTextFill(Color.WHITE);
-        lblAssignmentName.setAlignment(Pos.BOTTOM_LEFT);
-        lblAssignmentName.setTextFill(Color.WHITE);
-        lblGrade.setAlignment(Pos.BOTTOM_RIGHT);
-        lblGrade.setTextFill(Color.WHITE);
-        
-        //Resize labels to specified width 
-        //(same as the headers above assignmentListVBox)
-        lblDate.setMaxWidth(122);
-        lblAssignmentName.setMaxWidth(230);
-        lblGrade.setMaxWidth(122);
-        
-        //Create HBox to align assignment data
-        HBox assignmentHBox = new HBox();
-        
-        //Allow the labels to grow to their max width
-        assignmentHBox.setHgrow(lblDate, Priority.ALWAYS);
-        assignmentHBox.setHgrow(lblAssignmentName, Priority.ALWAYS);
-        assignmentHBox.setHgrow(lblGrade, Priority.ALWAYS);
-        
-        //Add labels to Hbox
-        assignmentHBox.getChildren().addAll(lblDate,lblAssignmentName,lblGrade);
-        
-        //Create a separator, Add padding top and bottom
-        //and set width to fill VBox
-        Separator spr = new Separator();
-        spr.setPadding(new Insets(5,0,5,0));
-        spr.setMaxWidth(Double.MAX_VALUE);
-        
-        //Add HBox and Separator to the VBox
-        assignmentListVBox.getChildren().addAll(assignmentHBox, spr);
-    }
-    
-    
-    
-    /*
-        Display Create Assingment Pane
-    */
-    public void displayCreateAssignmentPane(AssignmentType assignmentType) {
-        
-        //Variables
-        int atID = assignmentType.getATID();
-        
-        /*
-            New Create button
-        */
-        CustomButton btnCreate = createButton("Create", atID);
-        
-        //Action Event
-        btnCreate.setOnAction((ActionEvent event) -> {
-            
-        });
-        
-        
-        /*
-            New Back Button
-        */
-        CustomButton btnBack = createButton("<-", atID);
-        
-        btnBack.setOnAction((ActionEvent event) -> {
-        
-            displayAssignmentPane(assignmentType);
-            
-        });
-        
-        //Clear and repopulate button HBox
-        buttonAHBox.getChildren().clear();
-        buttonAHBox.getChildren().addAll(btnBack, btnCreate);
-        
-    }
-    
-    
-    
-    
-    /*
-        Display the Settings Pane and componets for X Course
-    */
-    public void displaySettings(int id) {
+            //Reset the error lable and course textbox.
+            lblResult.setText("");
+            txtCourseName.setText("");
+        }
                
-        //Switch Panes
-        switchPane(settingsSPane);
-
-        settingsVBox.getChildren().clear();
-            
-        CustomButton btnDelete = createButton("Delete", id);
-
-        btnDelete.setOnAction((ActionEvent event) -> {
-            int result = Course.deleteRecord(btnDelete.getID());
-
-            if(result == 1) {
-                System.out.println("Deleted");
-            }
-
+        if(result == 1) {
+                        
+            //Clear the VBox and then repopulate them
             courseListVBox.getChildren().clear();
-
+                        
             //List of courses in DB
             ArrayList<Course> courseList;
             courseList = Course.getCourse();
-
-
+                       
             //Loop through all courses and display them
             courseList.stream().forEach((aCourse) -> {
                 displayCourse(aCourse);
             });
-
-            //Switch Panes
-            switchPane(addCoursePane);  
-
-        });
-        
-        settingsVBox.getChildren().add(btnDelete);
+        }
     }
     
+    
+    
+    /*
+        Create New Assignment Type
+    */
+    public boolean createAssignmentType(int courseID) {
+
+        if(txtName.getText().isEmpty() == false) {
+           
+            if(txtPercentage.getText().isEmpty() == false) {
+               
+                String name;
+                Double percentage;
+
+                name = txtName.getText();
+                percentage = Double.valueOf(txtPercentage.getText());
+
+                //Create new Assignment Type
+                AssignmentType assignmentType = new AssignmentType(name, percentage, 0.0, courseID); 
+
+                //Add new Assignment Type to database
+                int result = AssignmentType.addAssignmentType(assignmentType);
+
+                if(result == 1 ) {
+                    
+                    Course course = Course.getACourse(courseID);
+
+                    /*
+                         Add data from this course to the UI
+                    */
+                    lblCourseName.setText(course.getCourseName());
+
+                    //Clear current vboxs before repopulating
+                    courseContentVBox.getChildren().clear();
+                    overallVBox.getChildren().clear();
+
+                    //Display the assignmentType to vbox as button
+                    displayAssignmentTypes(course.getCourseID());
+                    
+                    //Switch Panes
+                    switchPane(courseContentPane);
+                    
+                    return true;
+                }
+            } else {
+                lblPercentage.setText("Required Field.");
+                return false;
+            }
+       } else {
+            lblName.setText("Required Field.");
+            return false;
+       }
+        return false;
+    }
+    
+    
+    /*
+        Create Assignment
+    */
+    public void createAssignment(AssignmentType assignmentType) {
+        
+        int atID = assignmentType.getATID();
+        
+        //User Data
+        String aName = txtAName.getText();
+        int aGrade = Integer.parseInt(txtAGrade.getText());
+        String aDate = dpDate.getValue().toString();
+
+        
+        if(!(txtAName.getText().isEmpty())) {
+            
+            if(!(txtAGrade.getText().isEmpty())) {
+                
+                if(!(aDate.isEmpty())) {
+                     
+                    //Create new assignment
+                    Assignment assignment = new Assignment(aName, aGrade, aDate, atID);
+                    
+                    //Add Assignment
+                    int result = Assignment.addAssignment(assignment);
+                    
+                    if(result == 1) {
+                        
+                        //Switch panes
+                        switchPane(assignmentAPane);
+                        
+                        //Display Pane content
+                        displayAssignmentPane(assignmentType);
+                        
+                        //Clear Screen
+                        txtAName.setText("");
+                        txtAGrade.setText("");
+                        dpDate.setValue(LocalDate.now());
+                        
+                    } else {
+                        
+                        System.out.println("Add failed.");
+                        
+                    }
+                    
+                } else {
+                    System.out.println("Date is empty.");
+                }
+                
+            } else {
+                System.out.println("Grade is empty.");
+            }
+            
+        } else {
+            System.out.println("Name is empty.");
+        }
+        
+        
+        
+        
+    }
+    
+    
+   
+    /***************************************************************************
+    
+    Other Methods
+    
+    ***************************************************************************/  
+    
+  
     
     /*
         Generate basic Custom Button

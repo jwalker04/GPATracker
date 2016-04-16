@@ -106,10 +106,10 @@ public class AssignmentDA {
             }
             
             //create a SQL string to get data from database
-            String strSQL = "INSERT INTO tblAssignmentType (aName, aGrade, aDate, atID ) VALUES ('" 
+            String strSQL = "INSERT INTO tblAssignment (aName, aGrade, aDate, atID ) VALUES ('" 
                     + assignment.getAName() + "',"
                     + assignment.getAGrade() + ",'"
-                    + assignment.getADate()
+                    + assignment.getADate() + "',"
                     + assignment.getATID() + ")";
 
             // run the query

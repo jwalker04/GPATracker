@@ -21,7 +21,7 @@ CREATE TABLE tblAssignment (
     aID INT NOT NULL GENERATED ALWAYS AS IDENTITY,
     aName varchar(50) NOT NULL,
     aGrade DOUBLE NOT NULL,
-    aDate varchar(8) NOT NULL,
+    aDate varchar(10) NOT NULL,
     atID INT NOT NULL,
     PRIMARY KEY (aID),
     FOREIGN KEY (atID) REFERENCES tblAssignmentType(atID)

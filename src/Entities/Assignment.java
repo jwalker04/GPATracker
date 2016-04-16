@@ -87,7 +87,7 @@ public class Assignment {
     
     
     
-    /* Method Name:     getRecords
+    /* Method Name:     getAssignment
     * Purpose:          To get all the records from a table in the database
     * Parameters:	None
     * Return:		A vector of all objects made by each record - Vector
@@ -104,7 +104,7 @@ public class Assignment {
         }
     }
     
-     /* Method Name:     addRecord
+     /* Method Name:     addAssignment
     * Purpose:          To get all the records from a table in the database
     * Parameters:	None
     * Return:		A vector of all objects made by each record - Vector
@@ -121,7 +121,7 @@ public class Assignment {
         }
     }
     
-    /* Method Name:     deleteRecords
+    /* Method Name:     deleteAssignment
     * Purpose:          To get all the records from a table in the database
     * Parameters:	None
     * Return:		A vector of all objects made by each record - Vector
