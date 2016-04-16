@@ -805,10 +805,18 @@ public class FXMLDocumentController implements Initializable {
                     //Create new assignment
                     Assignment assignment = new Assignment(aName, aGrade, aDate, atID);
                     
-                    //Add Assignment
+                    //Add Assignment to DB
                     int result = Assignment.addAssignment(assignment);
                     
                     if(result == 1) {
+                        
+                        //Variables 
+                        double overallATGrade;
+                        
+                        //Calculate Overall grade for the assignmentType
+                        overallATGrade = calculateATOverall(atID);
+                        
+                        //Update AT overall grade
                         
                         //Switch panes
                         switchPane(assignmentAPane);
@@ -838,11 +846,46 @@ public class FXMLDocumentController implements Initializable {
         } else {
             System.out.println("Name is empty.");
         }
-        
-        
-        
-        
     }
+    
+    
+    /*
+        Calculate overall grade for assignmentType
+    */
+    public double calculateATOverall (int atID) {
+        
+        //Variables
+        ArrayList<Assignment> aList;
+        Assignment assignment;
+        double overallGrade = 0.0;
+        int numOfAssignments = 0;
+        
+        //Get list of all assignments of assignmentType atID
+        aList = Assignment.getAssignment(atID);
+        
+        for (int i = 0; i < aList.size(); i++) {
+            
+            numOfAssignments++;
+            
+            //Get assignment at index
+            assignment = aList.get(i);
+            
+            //Get grade from assignment
+            double grade = assignment.getAGrade();
+            
+            //Add grade to total overall grade
+            overallGrade += grade;
+            
+        }
+        
+        //Divide overallGrade by total number of assignments to determine average
+        overallGrade /= numOfAssignments;
+        
+        
+        return overallGrade;
+    }
+    
+    
     
     
    
