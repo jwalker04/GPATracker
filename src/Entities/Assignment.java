@@ -136,4 +136,23 @@ public class Assignment {
             return -9;
         }
     }
+    
+    
+    
+    /* Method Name:     updateAssignment
+    * Purpose:          To get all the records from a table in the database
+    * Parameters:	None
+    * Return:		A vector of all objects made by each record - Vector
+    * Change Log:       Brad Walker 12/23/2015
+    */
+    public static int updateAssignment(Assignment assignment) {
+        try {
+
+            return AssignmentDA.updateAssignment(assignment);
+
+        } catch (Exception ex) {
+            System.err.println("Error occured in Class:Course:updateAssignment();  " + ex.getMessage());
+            return -9;
+        }
+    }
 }

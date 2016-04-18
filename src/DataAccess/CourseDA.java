@@ -249,4 +249,44 @@ public class CourseDA {
         }
     }
     
+    /*
+        Update Course
+    */
+    public static int updateCourse(Course course) {
+        
+        // error handling
+        try
+        {
+            //connect to DB
+            aConnection = mdlDB.ConnectToDb();
+            
+            //create a statement
+            Statement aStatement = aConnection.createStatement();
+            
+            //check the connection status
+            if (aConnection == null)
+            {
+                System.out.println("Database connection failed!");
+                return -9;
+            }
+            
+            //create a SQL string to get data from database
+            String strSQL = "UPDATE tblCourse SET "
+                    + "cName = '" + course.getCourseName()
+                    + "', cOverall = " + course.getCourseOverall()
+                    + " WHERE cID = " + course.getCourseID();
+
+            // run the query
+            return aStatement.executeUpdate(strSQL);
+
+        }
+        catch (Exception e) {
+            System.err.println("Error occured in Class:CourseDA:updateCourse()" + e.getMessage());
+            return -9;
+        }
+    }
+    
+    
+    
+    
 }

@@ -99,10 +99,10 @@ public class Course {
     * Return:		A vector of all objects made by each record - Vector
     * Change Log:       Brad Walker 12/23/2015
     */
-    public static int addRecord(Course a) {
+    public static int addCourse(Course course) {
         try {
 
-            return CourseDA.addRecord(a);
+            return CourseDA.addRecord(course);
 
         } catch (Exception ex) {
             System.err.println("Error occured in Class:Course:deleteRecord();  " + ex.getMessage());
@@ -116,15 +116,34 @@ public class Course {
     * Return:		A vector of all objects made by each record - Vector
     * Change Log:       Brad Walker 12/23/2015
     */
-    public static int deleteRecord(int recordID) {
+    public static int deleteCourse(int courseID) {
         try {
 
-            return CourseDA.deleteRecord(recordID);
+            return CourseDA.deleteRecord(courseID);
 
         } catch (Exception ex) {
-            System.err.println("Error occured in Class:Course:deleteRecord();  " + ex.getMessage());
+            System.err.println("Error occured in Class:Course:deleteCourse();  " + ex.getMessage());
             return -9;
         }
     }
+    
+    
+     /* Method Name:     addRecord
+    * Purpose:          To get all the records from a table in the database
+    * Parameters:	None
+    * Return:		A vector of all objects made by each record - Vector
+    * Change Log:       Brad Walker 12/23/2015
+    */
+    public static int updateCourse(Course course) {
+        try {
+
+            return CourseDA.updateCourse(course);
+
+        } catch (Exception ex) {
+            System.err.println("Error occured in Class:Course:updateCourse();  " + ex.getMessage());
+            return -9;
+        }
+    }
+    
     
 }

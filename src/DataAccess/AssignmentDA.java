@@ -161,4 +161,47 @@ public class AssignmentDA {
     
     
     
+    
+    
+    
+    
+    /*
+        Update Course
+    */
+    public static int updateAssignment(Assignment assignment) {
+        
+        // error handling
+        try
+        {
+            //connect to DB
+            aConnection = mdlDB.ConnectToDb();
+            
+            //create a statement
+            Statement aStatement = aConnection.createStatement();
+            
+            //check the connection status
+            if (aConnection == null)
+            {
+                System.out.println("Database connection failed!");
+                return -9;
+            }
+            
+            //create a SQL string to get data from database
+            String strSQL = "UPDATE tblAssignment SET "
+                    + "aName = '" + assignment.getAName()
+                    + "', aGrade = " + assignment.getAGrade()
+                    + ", aDate = '" + assignment.getADate()
+                    + "' WHERE aID = " + assignment.getAID();
+
+            // run the query
+            return aStatement.executeUpdate(strSQL);
+
+        }
+        catch (Exception e) {
+            System.err.println("Error occured in Class:CourseDA:updateAssignment()" + e.getMessage());
+            return -9;
+        }
+    }
+    
+    
 }

@@ -125,6 +125,8 @@ public class FXMLDocumentController implements Initializable {
     private Label lblAssignmentTypeName;
     @FXML
     private VBox assignmentListVBox;
+    @FXML
+    private Label lblATOverall;
     
     
     /*
@@ -226,6 +228,7 @@ public class FXMLDocumentController implements Initializable {
         //Variables
         int atID = assignmentType.getATID();
         String atName = assignmentType.getATName();
+        double ATOverall = assignmentType.getATOverall();
         
         //Switch panes
         switchPane(assignmentAPane);
@@ -235,6 +238,9 @@ public class FXMLDocumentController implements Initializable {
         
         //Set the Assignment Type Name
         lblAssignmentTypeName.setText(atName);
+        
+        //Set the AT overall grade
+        lblATOverall.setText(Double.toString(ATOverall));
         
         //Loop through list of assignments
         //Get list of assignment types for current course.
@@ -328,7 +334,7 @@ public class FXMLDocumentController implements Initializable {
         CustomButton btnDelete = createButton("Delete", id);
 
         btnDelete.setOnAction((ActionEvent event) -> {
-            int result = Course.deleteRecord(btnDelete.getID());
+            int result = Course.deleteCourse(btnDelete.getID());
 
             if(result == 1) {
                 System.out.println("Deleted");
@@ -704,7 +710,7 @@ public class FXMLDocumentController implements Initializable {
         } else {
                         
             //Add Course object to DB
-            result = Course.addRecord(course);
+            result = Course.addCourse(course);
             
             //Reset the error lable and course textbox.
             lblResult.setText("");
@@ -817,6 +823,8 @@ public class FXMLDocumentController implements Initializable {
                         overallATGrade = calculateATOverall(atID);
                         
                         //Update AT overall grade
+                        assignmentType.setATOverall(overallATGrade);
+                        AssignmentType.updateAssignmentType(assignmentType);
                         
                         //Switch panes
                         switchPane(assignmentAPane);

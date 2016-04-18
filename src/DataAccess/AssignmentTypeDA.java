@@ -58,7 +58,11 @@ public class AssignmentTypeDA {
             //use a loop to build our vector with objects
             while(boolGotRecord)
             {
-                assignmentType = new AssignmentType(rs.getInt("atID"), rs.getString("atName"), rs.getDouble("atPercentage"), rs.getDouble("atOverall"), rs.getInt("cID"));
+                assignmentType = new AssignmentType(rs.getInt("atID"), 
+                        rs.getString("atName"), 
+                        rs.getDouble("atPercentage"), 
+                        rs.getDouble("atOverall"), 
+                        rs.getInt("cID"));
                           
                 //put onto the vector
                 aList.add(assignmentType);
@@ -155,6 +159,46 @@ public class AssignmentTypeDA {
         }
         catch (Exception e) {
             System.err.println("Error occured in Class:AssignmentTypeDA:deleteAssignmentType()" + e.getMessage());
+            return -9;
+        }
+    }
+    
+    
+    
+    /*
+        Update Course
+    */
+    public static int updateAssignmentType(AssignmentType assignmentType) {
+        
+        // error handling
+        try
+        {
+            //connect to DB
+            aConnection = mdlDB.ConnectToDb();
+            
+            //create a statement
+            Statement aStatement = aConnection.createStatement();
+            
+            //check the connection status
+            if (aConnection == null)
+            {
+                System.out.println("Database connection failed!");
+                return -9;
+            }
+            
+            //create a SQL string to get data from database
+            String strSQL = "UPDATE tblAssignmentType SET "
+                    + "atName = '" + assignmentType.getATName()
+                    + "', atPercentage = " + assignmentType.getATPercentage()
+                    + ", atOverall = " + assignmentType.getATOverall()
+                    + " WHERE atID = " + assignmentType.getATID();
+
+            // run the query
+            return aStatement.executeUpdate(strSQL);
+
+        }
+        catch (Exception e) {
+            System.err.println("Error occured in Class:CourseDA:updateAssignmentType()" + e.getMessage());
             return -9;
         }
     }

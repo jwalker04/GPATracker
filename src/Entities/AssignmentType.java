@@ -117,7 +117,7 @@ public class AssignmentType {
             return AssignmentTypeDA.addAssignmentType(assignmentType);
 
         } catch (Exception ex) {
-            System.err.println("Error occured in Class:Course:deleteAssignmentType();  " + ex.getMessage());
+            System.err.println("Error occured in Class:Course:addAssignmentType();  " + ex.getMessage());
             return -9;
         }
     }
@@ -139,4 +139,22 @@ public class AssignmentType {
     }
     
     
+    
+    
+    /* Method Name:     addRecord
+    * Purpose:          To get all the records from a table in the database
+    * Parameters:	None
+    * Return:		A vector of all objects made by each record - Vector
+    * Change Log:       Brad Walker 12/23/2015
+    */
+    public static int updateAssignmentType(AssignmentType assignmentType) {
+        try {
+
+            return AssignmentTypeDA.updateAssignmentType(assignmentType);
+
+        } catch (Exception ex) {
+            System.err.println("Error occured in Class:Course:updateAssignmentType();  " + ex.getMessage());
+            return -9;
+        }
+    }
 }

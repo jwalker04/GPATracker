@@ -95,35 +95,6 @@
               <Label fx:id="lblResult" layoutX="302.0" layoutY="136.0" prefHeight="22.0" prefWidth="200.0" text="" />
             </children>
           </AnchorPane>
-            <AnchorPane fx:id="assignmentAPane" prefHeight="200.0" prefWidth="200.0" styleClass="content-pane-background">
-               <children>
-                  <Label fx:id="lblAssignmentTypeName" layoutX="42.0" layoutY="29.0" prefHeight="100.0" prefWidth="209.0" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="36.0" />
-                     </font>
-                  </Label>
-                  <HBox alignment="CENTER" layoutX="42.0" layoutY="168.0" prefHeight="65.0" prefWidth="472.0">
-                     <children>
-                        <Label prefHeight="194.0" prefWidth="122.0" text="Date" textFill="WHITE">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                        <Label prefHeight="122.0" prefWidth="230.0" text="Assignment Name" textFill="WHITE">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                        <Label alignment="CENTER_RIGHT" prefHeight="194.0" prefWidth="122.0" text="Grade" textFill="WHITE">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <VBox fx:id="assignmentListVBox" layoutX="42.0" layoutY="233.0" prefHeight="356.0" prefWidth="472.0" />
-               </children>
-            </AnchorPane>
             <AnchorPane fx:id="createAssignmentAPane" prefHeight="200.0" prefWidth="200.0" styleClass="content-pane-background">
                <children>
                   <VBox layoutX="14.0" layoutY="140.0" prefHeight="128.0" prefWidth="443.0">
@@ -156,6 +127,40 @@
                         <HBox fx:id="buttonAHBox" alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" />
                      </children>
                   </VBox>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="assignmentAPane" prefHeight="200.0" prefWidth="200.0" styleClass="content-pane-background">
+               <children>
+                  <Label fx:id="lblATOverall" alignment="CENTER" layoutX="251.0" layoutY="54.0" prefHeight="50.0" prefWidth="100.0" textFill="WHITE">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblAssignmentTypeName" layoutX="42.0" layoutY="29.0" prefHeight="100.0" prefWidth="209.0" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="36.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER" layoutX="42.0" layoutY="168.0" prefHeight="65.0" prefWidth="472.0">
+                     <children>
+                        <Label prefHeight="194.0" prefWidth="122.0" text="Date" textFill="WHITE">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="122.0" prefWidth="230.0" text="Assignment Name" textFill="WHITE">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" prefHeight="194.0" prefWidth="122.0" text="Grade" textFill="WHITE">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <VBox fx:id="assignmentListVBox" layoutX="42.0" layoutY="233.0" prefHeight="356.0" prefWidth="472.0" />
                </children>
             </AnchorPane>
          </children>
