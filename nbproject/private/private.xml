@@ -4,6 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/Users/Brad/GPATracker/src/FXML/FXMLDocumentController.java</file>
+            <file>file:/Users/Brad/GPATracker/src/DataAccess/CourseDA.java</file>
+            <file>file:/Users/Brad/GPATracker/src/Entities/Assignment.java</file>
+            <file>file:/Users/Brad/GPATracker/src/Entities/Course.java</file>
+            <file>file:/Users/Brad/GPATracker/src/DataAccess/AssignmentDA.java</file>
+            <file>file:/Users/Brad/GPATracker/src/DataAccess/AssignmentTypeDA.java</file>
+            <file>file:/Users/Brad/GPATracker/src/Entities/AssignmentType.java</file>
+            <file>file:/Users/Brad/GPATracker/src/Database.sql</file>
         </group>
     </open-files>
 </project-private>

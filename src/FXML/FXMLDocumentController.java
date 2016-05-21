@@ -240,7 +240,7 @@ public class FXMLDocumentController implements Initializable {
         lblAssignmentTypeName.setText(atName);
         
         //Set the AT overall grade
-        lblATOverall.setText(Double.toString(ATOverall));
+        lblATOverall.setText(String.format("%.2f", ATOverall));
         
         //Loop through list of assignments
         //Get list of assignment types for current course.
@@ -484,7 +484,7 @@ public class FXMLDocumentController implements Initializable {
             
             Double ATOverall = assignmentType.getATOverall();
 
-            String string = String.valueOf(ATOverall);
+            String string = String.valueOf(String.format("%.2f", ATOverall));
                                     
             Label lblOverall = new Label(string);
             
